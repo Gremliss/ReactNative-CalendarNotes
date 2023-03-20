@@ -1,20 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { useEffect, useState } from "react";
+import MainScreen from "./app/screens/MainScreen";
+
+const Stack = createStackNavigator();
 
 export default function App() {
+  const [calendarNotes, setCalendarNotes] = useState({});
+
+  const findCalendarNotes = async () => {
+    const result = await AsyncStorage.getItem("calendarNotes");
+    if (result !== null) setCalendarNotes(JSON.parse(result));
+  };
+  useEffect(() => {
+    findCalendarNotes();
+  }, []);
+
+  const RenderMainScreen = (props) => (
+    <MainScreen {...props} renderedCalendarNotes={calendarNotes} />
+  );
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          component={RenderMainScreen}
+          name="MainScreen"
+          options={{
+            title: "Calendar Notes",
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

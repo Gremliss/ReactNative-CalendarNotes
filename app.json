@@ -4,7 +4,7 @@
     "slug": "CalendarNotes",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/iconCalendarNotes.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -14,20 +14,24 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/iconCalendarNotes.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.gremliss.CalendarNotes"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/iconCalendarNotes.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f750d39c-8fb5-4b07-aaa1-db3db7766e79"
+      }
     }
   }
 }
